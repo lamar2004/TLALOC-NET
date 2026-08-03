@@ -32,10 +32,10 @@ import {
 const BRAND = {
   name: "NIVEL",
   suffix: "Mantenimiento Integral",
-  phone: "55 0000 0000",
-  phoneHref: "+525500000000",
-  whatsapp: "525500000000",
-  email: "contacto@nivel-mantenimiento.mx",
+  phone: "56 4677 0490",
+  phoneHref: "+525646770490",
+  whatsapp: "525646770490",
+  email: "alexandermedina2604@gmail.com",
   address: "Cuautitlán Izcalli, Estado de México",
 };
 
@@ -127,26 +127,7 @@ const GALLERY_ITEMS = {
   ],
 };
 
-const TESTIMONIOS = [
-  {
-    name: "Administración — Cond. Las Torres",
-    role: "Cuautitlán Izcalli",
-    text: "Desde que llevamos el mantenimiento con ellos ya no tenemos quejas de los vecinos por el agua. Cumplen fechas y dejan todo limpio.",
-    rating: 5,
-  },
-  {
-    name: "Laura M.",
-    role: "Gerente de oficina",
-    text: "Resolvieron una fuga que llevaba semanas sin poder ubicar. El diagnóstico fue rápido y el precio justo.",
-    rating: 5,
-  },
-  {
-    name: "Plaza Comercial Vía Norte",
-    role: "Mantenimiento de plaza",
-    text: "Tenemos contrato de mantenimiento preventivo desde hace dos años. Buena comunicación y reportes claros de cada visita.",
-    rating: 4,
-  },
-];
+
 
 const COBERTURA = [
   "Cuautitlán Izcalli",
@@ -170,7 +151,7 @@ const NAV_LINKS = [
   { id: "nosotros", label: "Nosotros" },
   { id: "servicios", label: "Servicios" },
   { id: "galeria", label: "Galería" },
-  { id: "testimonios", label: "Testimonios" },
+ 
   { id: "cobertura", label: "Cobertura" },
   { id: "contacto", label: "Contacto" },
 ];
@@ -477,6 +458,8 @@ export default function App() {
         </p>
       </section>
 
+      
+
       {/* ---------------- COTIZACIÓN ---------------- */}
       <section id="cotizacion" className="section section--alt">
         <div className="cotizacion-grid">
@@ -586,10 +569,7 @@ export default function App() {
                 </label>
 
                 <div className="form-actions">
-                  <button type="submit" className="btn btn--primary">
-                    Enviar solicitud
-                    <Send size={16} />
-                  </button>
+               
                   <a
                     className="btn btn--ghost"
                     href={`https://wa.me/${BRAND.whatsapp}?text=${waMessage}`}
@@ -606,36 +586,10 @@ export default function App() {
         </div>
       </section>
 
-      {/* ---------------- TESTIMONIOS ---------------- */}
-      <section id="testimonios" className="section">
-        <Reveal>
-          <Eyebrow code="05">Testimonios</Eyebrow>
-          <h2 className="section-title">Lo que dicen quienes ya nos dieron mantenimiento.</h2>
-        </Reveal>
+      <hr />
 
-        <div className="testimonios-row">
-          {TESTIMONIOS.map((t, i) => (
-            <Reveal as="figure" className="testimonio-card" delay={i * 100} key={t.name}>
-              <Quote size={20} className="testimonio-quote" />
-              <blockquote>{t.text}</blockquote>
-              <div className="testimonio-stars" aria-label={`${t.rating} de 5 estrellas`}>
-                {Array.from({ length: 5 }).map((_, idx) => (
-                  <Star
-                    key={idx}
-                    size={14}
-                    fill={idx < t.rating ? "currentColor" : "none"}
-                    strokeWidth={1.5}
-                  />
-                ))}
-              </div>
-              <figcaption>
-                <span className="testimonio-name">{t.name}</span>
-                <span className="testimonio-role">{t.role}</span>
-              </figcaption>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+      {/* ---------------- TESTIMONIOS ---------------- */}
+     
 
       {/* ---------------- COBERTURA ---------------- */}
       <section id="cobertura" className="section section--alt">
