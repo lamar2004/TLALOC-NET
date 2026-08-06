@@ -30,8 +30,9 @@ import {
 /* ------------------------------------------------------------------ */
 
 const BRAND = {
-  name: "NIVEL",
+  name: "ECOTLALOC",
   suffix: "Mantenimiento Integral",
+  logo: "/images/ECOTLALOC-Sfondo.png",
   phone: "56 4677 0490",
   phoneHref: "+525646770490",
   whatsapp: "525646770490",
@@ -106,11 +107,11 @@ const GALLERY_TABS = ["Antes y después", "Personal trabajando", "Equipos", "Pro
 
 const GALLERY_ITEMS = {
   "Antes y después": [
-    { label: "Cisterna — antes / después" },
-    { label: "Fachada — antes / después" },
-    { label: "Azotea — antes / después" },
+    { img: "../images/sisterna.jpg", label: "Tinaco limpio" },
+    { img: "../images/fachada.jpg", label: "Fachada renovada" },
+    { img: "../images/azotea.jpg", label: "Azotea impermeabilizada" },
   ],
-  "Personal trabajando": [
+  "Personal trabajando": [  
     { label: "Equipo en lavado de tinaco" },
     { label: "Técnico en instalación eléctrica" },
     { label: "Cuadrilla de pintura" },
@@ -252,7 +253,7 @@ export default function App() {
       <header className="nav">
         <div className="nav-inner">
           <button className="brand" onClick={() => scrollTo("inicio")} aria-label="Ir al inicio">
-            <span className="brand-mark">N</span>
+           <Logo />
             <span className="brand-text">
               {BRAND.name}
               <span className="brand-suffix">{BRAND.suffix}</span>
@@ -424,12 +425,12 @@ export default function App() {
       </section>
 
       {/* ---------------- GALERÍA ---------------- */}
-      <section id="galeria" className="section">
+        <section id="galeria" className="section">
         <Reveal>
           <Eyebrow code="03">Galería</Eyebrow>
           <h2 className="section-title">Trabajo verificable, no solo prometido.</h2>
         </Reveal>
-
+ 
         <Reveal className="gallery-tabs" delay={80}>
           {GALLERY_TABS.map((tab) => (
             <button
@@ -441,20 +442,20 @@ export default function App() {
             </button>
           ))}
         </Reveal>
-
+ 
         <div className="gallery-grid">
           {GALLERY_ITEMS[galleryTab].map((item, i) => (
-            <Reveal className="gallery-item" delay={i * 90} key={item.label}>
-              <div className="gallery-placeholder">
-                <span className="gallery-placeholder-tag">FOTO</span>
-                <span className="gallery-placeholder-label">{item.label}</span>
-              </div>
+            <Reveal className="gallery-item" delay={i * 90} key={item.label || i}>
+              <figure className="gallery-photo">
+                <img src={item.img} alt={item.label || "Imagen de galería"} loading="lazy" />
+                {item.label ? <figcaption>{item.label}</figcaption> : null}
+              </figure>
             </Reveal>
           ))}
         </div>
         <p className="gallery-note">
-          * Espacios de ejemplo — aquí se colocarán fotografías reales del antes y después,
-          personal, equipos y proyectos.
+          * Coloca tus fotos en <code>public/images/</code> con estos nombres (o cambia las rutas
+          en <code>GALLERY_ITEMS</code>).
         </p>
       </section>
 
@@ -675,7 +676,7 @@ export default function App() {
       <footer className="footer">
         <div className="footer-inner">
           <div className="footer-brand">
-            <span className="brand-mark brand-mark--footer">N</span>
+            <Logo src="/images/ECOTLALOC.png"/>
             <span>
               {BRAND.name}
               <span className="brand-suffix">{BRAND.suffix}</span>
@@ -688,10 +689,7 @@ export default function App() {
               </button>
             ))}
           </nav>
-          <p className="footer-legal">
-            Sitio de ejemplo con fines de presentación. Logotipo, redes sociales, número de
-            WhatsApp, correo y fotografías se sustituirán por los definitivos del cliente.
-          </p>
+    
         </div>
       </footer>
 
@@ -785,6 +783,21 @@ function Leader({ x1, y1, x2, y2, label, text, flip }) {
 /* ------------------------------------------------------------------ */
 /*  COMPONENTES ANIMADOS                                                */
 /* ------------------------------------------------------------------ */
+
+function Logo({ className = "" }) {
+  const [failed, setFailed] = useState(false);
+  if (failed) {
+    return <span className={`brand-mark ${className}`}>{BRAND.name.charAt(0)}</span>;
+  }
+  return (
+    <img
+      src={BRAND.logo}
+      alt={`Logo de ${BRAND.name}`}
+      className={`brand-mark ${className}`}
+      onError={() => setFailed(true)}
+    />
+  );
+}
 
 /* Texto que entra palabra por palabra, en cascada */
 function SplitText({ text, startDelay = 0 }) {
@@ -1054,20 +1067,24 @@ function GlobalStyles() {
         padding: 0;
       }
       .brand-mark {
-        width: 34px; height: 34px;
+        flex: none;
+        width: 70px; height: 70px;
         display: grid; place-items: center;
         background: var(--teal);
         color: #fff;
         font-family: 'Barlow Condensed', sans-serif;
         font-weight: 700;
-        font-size: 18px;
+        font-size: 25px;
         border-radius: 6px;
+        object-fit: contain;
+        padding: 4px;
+        box-sizing: border-box;
       }
       .brand-mark--footer { background: var(--amber); color: var(--teal-deep); }
       .brand-text {
         font-family: 'Barlow Condensed', sans-serif;
         font-weight: 700;
-        font-size: 20px;
+        font-size: 40px;
         letter-spacing: 0.03em;
         color: var(--teal-deep);
         display: flex;
@@ -1414,7 +1431,7 @@ function GlobalStyles() {
       .service-card p { font-size: 13.5px; color: var(--ink-soft); margin: 0; }
 
       /* -------- galeria -------- */
-      .gallery-tabs {
+       .gallery-tabs {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
@@ -1440,28 +1457,37 @@ function GlobalStyles() {
         grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
         gap: 16px;
       }
-      .gallery-placeholder {
+      .gallery-photo {
+        margin: 0;
         aspect-ratio: 4 / 3;
         border-radius: var(--radius);
-        background: linear-gradient(135deg, var(--line-faint) 50%, #DCEAE6 50%);
-        border: 1px dashed var(--line);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        color: var(--ink-soft);
+        overflow: hidden;
+        position: relative;
+        border: 1px solid var(--line);
+        background: var(--line-faint);
       }
-      .gallery-placeholder-tag {
+      .gallery-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .gallery-photo figcaption {
+        position: absolute;
+        left: 0; right: 0; bottom: 0;
+        padding: 10px 12px;
+        font-size: 12.5px;
+        color: #fff;
+        background: linear-gradient(0deg, rgba(7, 59, 82, 0.82), transparent);
+      }
+ 
+      .gallery-note code {
         font-family: 'IBM Plex Mono', monospace;
-        font-size: 11px;
-        letter-spacing: 0.08em;
-        color: var(--teal);
-        background: #fff;
-        padding: 3px 8px;
-        border-radius: 999px;
+        font-size: 12px;
+        background: var(--line-faint);
+        padding: 1px 5px;
+        border-radius: 4px;
       }
-      .gallery-placeholder-label { font-size: 13px; text-align: center; padding: 0 12px; }
       .gallery-note { margin-top: 16px; font-size: 13px; color: var(--ink-soft); }
 
       /* -------- cotizacion -------- */
