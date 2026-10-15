@@ -33,10 +33,10 @@ const BRAND = {
   name: "ECOTLALOC",
   suffix: "Mantenimiento Integral",
   logo: "/images/ECOTLALOC-Sfondo.png",
-  phone: "56 4677 0490",
-  phoneHref: "+525646770490",
-  whatsapp: "525646770490",
-  email: "alexandermedina2604@gmail.com",
+  phone: "56 6533 8365",
+  phoneHref: "+525665338365",
+  whatsapp: "56 6533 8365",
+  email: "ecotlaloc@gmail.com",
   address: "Cuautitlán Izcalli, Estado de México",
 };
 
@@ -103,29 +103,15 @@ const SERVICES = [
   },
 ];
 
-const GALLERY_TABS = ["Antes y después", "Personal trabajando", "Equipos", "Proyectos realizados"];
+const GALLERY_TABS = ["Antes y después"];
 
 const GALLERY_ITEMS = {
   "Antes y después": [
-    { img: "../images/sisterna.jpg", label: "Tinaco limpio" },
-    { img: "../images/fachada.jpg", label: "Fachada renovada" },
-    { img: "../images/azotea.jpg", label: "Azotea impermeabilizada" },
-  ],
-  "Personal trabajando": [  
-    { label: "Equipo en lavado de tinaco" },
-    { label: "Técnico en instalación eléctrica" },
-    { label: "Cuadrilla de pintura" },
-  ],
-  Equipos: [
-    { label: "Bomba de succión" },
-    { label: "Equipo de impermeabilización" },
-    { label: "Herramienta especializada" },
-  ],
-  "Proyectos realizados": [
-    { label: "Edificio Reforma 120" },
-    { label: "Plaza Los Encinos" },
-    { label: "Corporativo Vía Norte" },
-  ],
+    { img: "../images/TINACOLIMPIO.png", label: "Tinaco limpio" },
+    { img: "../images/RENOVACION.jpg", label: "Fachada renovada" },
+    { img: "../images/AZOTEAIMPER.jpg", label: "Azotea impermeabilizada" },
+  ]
+ 
 };
 
 
@@ -454,8 +440,7 @@ export default function App() {
           ))}
         </div>
         <p className="gallery-note">
-          * Coloca tus fotos en <code>public/images/</code> con estos nombres (o cambia las rutas
-          en <code>GALLERY_ITEMS</code>).
+          
         </p>
       </section>
 
